@@ -14,7 +14,7 @@ and preprocessed data.
 ```bash
 ruby preprocess.rb sample_data.json
 python load.py processed_data.json
-# you will now have 1 month of comments loaded as dictionaries in a list and be at a pdb breakpoint
+# you will now have 10,000 comments loaded as dictionaries in a list and be at a pdb breakpoint
 ```
 
 This is a simple start. I am still downloading the rest of the dataset, and included the sample and
