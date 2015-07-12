@@ -31,28 +31,73 @@ def scores(results)
 end
 
 def average_sentiment scores
-  (scores.inject(0.0) { |sum, el| sum + el } / scores.size).round(4)
+  scores.inject(0.0) { |sum, el| sum + el } / scores.size
 end
 
-comments = get_comments # array of objs
+def count_negatives results
+  results.map do |r|
+    r[:sentiment]
+  end.select { |s| s == :negative }.count
+end
 
-res_1 = get_sentiments(comments, 0.6)
-res_2 = get_sentiments(comments, 0.8)
-res_3 = get_sentiments(comments, 0.4)
+def count_positives results
+  results.map do |r|
+    r[:sentiment]
+  end.select { |s| s == :positive }.count
+end
 
-res_1_scores = scores(res_1)
-res_2_scores = scores(res_2)
-res_3_scores = scores(res_3)
+def count_positives results
+  results.map do |r|
+    r[:sentiment]
+  end.select { |s| s == :neutral }.count
+end
 
-res_1_avg_sentiment = average_sentiment(res_1_scores)
-res_2_avg_sentiment = average_sentiment(res_2_scores)
-res_3_avg_sentiment = average_sentiment(res_3_scores)
 
-output = <<-SCORES
-Comment Set Size: #{comments.length}\n
-Result Three Avg Sentiment (threshold 0.4): #{res_3_avg_sentiment}\n
-Result One Avg Sentiment (threshold 0.6): #{res_1_avg_sentiment}\n
-Result Two Avg Sentiment (threshold 0.8): #{res_2_avg_sentiment}\n
-SCORES
 
-puts output
+def run
+  comments = get_comments # array of objs
+
+  res_1 = get_sentiments(comments, 0.6)
+  res_2 = get_sentiments(comments, 0.8)
+  res_3 = get_sentiments(comments, 0.4)
+
+  res_1_scores = scores(res_1)
+  res_2_scores = scores(res_2)
+  res_3_scores = scores(res_3)
+
+  res_1_avg_sentiment = average_sentiment(res_1_scores)
+  res_2_avg_sentiment = average_sentiment(res_2_scores)
+  res_3_avg_sentiment = average_sentiment(res_3_scores)
+
+  res_1_negs = count_negatives(res_1)
+  res_2_negs = count_negatives(res_2)
+  res_3_negs = count_negatives(res_3)
+
+  res_1_pos = count_positives(res_1)
+  res_2_pos = count_positives(res_2)
+  res_3_pos = count_positives(res_3)
+
+  res_1_neutral = count_positives(res_1)
+  res_2_neutral = count_positives(res_2)
+  res_3_neutral = count_positives(res_3)
+
+  <<-SCORES
+  Comment Set Size: #{comments.length}\n
+  Result Three Avg Sentiment (threshold 0.4): #{res_3_avg_sentiment}\n
+  Result Three Positive Sentiment Count: #{res_3_pos}\n
+  Result Three Negative Sentiment Count: #{res_3_negs}\n
+  Result Three Neutral Sentiment Count: #{res_3_neutral}\n\n
+
+  Result One Avg Sentiment (threshold 0.6): #{res_1_avg_sentiment}\n
+  Result One Positive Sentiment Count: #{res_1_pos}\n
+  Result One Negative Sentiment Count: #{res_1_negs}\n
+  Result One Neutral Sentiment Count: #{res_1_neutral}\n\n
+
+  Result Two Avg Sentiment (threshold 0.8): #{res_2_avg_sentiment}\n
+  Result Two Positive Sentiment Count: #{res_2_pos}\n
+  Result Two Negative Sentiment Count: #{res_2_negs}\n
+  Result Two Neutral Sentiment Count: #{res_2_neutral}\n\n
+  SCORES
+end
+
+puts run
