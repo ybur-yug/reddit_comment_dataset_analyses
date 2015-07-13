@@ -3,7 +3,11 @@
 The data sets given (month by month bz2 files) are newline-delimited JSON blocks. I have written preprocessing scripts
 that are detailed further in here
 
-You can find the torrent with all of them [here](magnet:?xt=urn:btih:7690f71ea949b868080401c749e878f98de34d3d&dn=reddit%5Fdata&tr=http%3A%2F%2Ftracker.pushshift.io%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80).
+You can find the torrent with all of it with this magnet link:
+
+```
+(magnet:?xt=urn:btih:7690f71ea949b868080401c749e878f98de34d3d&dn=reddit%5Fdata&tr=http%3A%2F%2Ftracker.pushshift.io%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80).
+```
 
 It is about 160gb compressed, < 1TB unzipped. I have included one month of comments in the repository that are already
 formatted to the style mentioned above (`data_sample.json`) and preprocessed data.
