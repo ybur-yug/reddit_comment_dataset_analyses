@@ -50,7 +50,7 @@ def run_month
   all_neg            = []
   all_neutral        = []
   FNS.each do |fn|
-    get_comments("processed/#{fn}")
+    get_comments("month_splits/#{fn}")
     res = get_sentiments(comments, 0.6)
     res_scores = scores(res)
     res_avg_sentiment = average_sentiment(res_scores)
