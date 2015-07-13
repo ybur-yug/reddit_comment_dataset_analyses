@@ -47,12 +47,12 @@ Result Two Neutral Sentiment Count: 7006
 ```
 
 #### Month
-Included is a `data.json` file. In order to turn this into the proper individual JSON files in the form `{"comments: [..]}` that
-I utilize you can simple run
-
-`split -l 10000 data.json`
+You can fine a file containing ~1,200,000 comments and their data [here](filedropped_link). In order to turn this
+into the proper individual JSON files in the form `{"comments: [..]}` that I utilize you can simple run
 
 `mkdir processed`
+
+`split -l 10000 data.json processed/data-`
 
 `ruby run_preprocessing.rb`
 
