@@ -5,8 +5,7 @@ require 'sentimental'
 FNS = `ls processed`.split("\n")
 
 def get_comments(fn)
-  data = File.open(fn).read
-  JSON.parse(data)['comments']
+  JSON.parse(File.open(fn).read)['comments']
 end
 
 def get_analyzer(threshold)
