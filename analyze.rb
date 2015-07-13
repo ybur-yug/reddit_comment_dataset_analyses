@@ -2,10 +2,11 @@ require 'pry'
 require 'json'
 require 'sentimental'
 
-FN = ARGV[0]
+FNS = `ls processed`.split("\n")
 
-def get_comments
-  JSON.parse(File.open(FN).read)['comments'] # array
+def get_comments(fn)
+  data = File.open(fn).read
+  JSON.parse(data)['comments']
 end
 
 def get_analyzer(threshold)
@@ -52,10 +53,33 @@ def count_positives results
   end.select { |s| s == :neutral }.count
 end
 
+def run_month
+  all_scores         = []
+  all_avg_sentiments = []
+  all_pos            = []
+  all_neg            = []
+  all_neutral        = []
+  FNS.each do |fn|
+    get_comments("processed/#{fn}")
+    binding.pry
+    res = get_sentiments(comments, 0.6)
+    res_scores = scores(res)
+    res_avg_sentiment = average_sentiment(res_scores)
+    res_negs = count_negatives(res)
+    res_pos = count_positives(res)
+    res_neutral = count_positives(res)
+    all_scores << res_scores
+    all_avg_sentiments << res_avg_sentiment
+    all_pos << res_pos
+    all_neg << res_negs
+    all_neutral << res_neutral
+  end
+  binding.pry
+  puts 'done'
+end
 
-
-def run
-  comments = get_comments # array of objs
+def run_sample
+  comments = get_comments('data_sample.json')
 
   res_1 = get_sentiments(comments, 0.6)
   res_2 = get_sentiments(comments, 0.8)
@@ -100,4 +124,5 @@ def run
   SCORES
 end
 
-puts run
+run_sample
+# run_month

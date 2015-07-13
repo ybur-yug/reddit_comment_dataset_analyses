@@ -19,6 +19,7 @@ and preprocessed data.
 
 ### Running It
 
+#### Sample
 ```bash
 ruby analyze.rb data_sample.json
 # =>
@@ -53,6 +54,16 @@ Result Two Negative Sentiment Count: 1199
 Result Two Neutral Sentiment Count: 7006
 
 ```
+
+#### Month
+Included is a `data.json` file. In order to turn this into the proper individual JSON files in the form `{"comments: [..]}` that
+I utilize you can simple run
+
+`split -l 10000 data.json`
+
+`mkdir processed`
+
+`ruby run_preprocessing.rb`
 
 This is a simple start. I am still downloading the rest of the dataset, and included the sample and
 a single month here just as a quick start of sorts.
