@@ -51,7 +51,7 @@ Result Two Neutral Sentiment Count: 7006
 ```
 
 #### Month
-You can fine a file containing ~1,200,000 comments and their data [here](filedropped_link). In order to turn this
+You can fine a file containing ~1,200,000 comments and their data [here](http://www.filedropper.com/data_6). In order to turn this
 into the proper individual JSON files in the form `{"comments: [..]}` that I utilize you can simple run
 
 `mkdir processed`
