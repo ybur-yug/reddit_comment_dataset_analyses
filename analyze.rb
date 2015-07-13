@@ -18,17 +18,14 @@ end
 def get_sentiments(comments, threshold)
   analyzer = get_analyzer(threshold)
   comments.map do |c|
-    comment = c['body']
-    score = analyzer.get_score(comment)
-    sentiment = analyzer.get_sentiment(comment)
-    { comment: comment, score: score, sentiment: sentiment }
+    { comment: c['body'],
+      score: analyzer.get_score(comment),
+      sentiment: analyzer.get_sentiment(comment) }
   end
 end
 
 def scores(results)
-  results.map do |r|
-    r[:score]
-  end
+  results.map { |r| r[:score] }
 end
 
 def average_sentiment scores
@@ -36,21 +33,15 @@ def average_sentiment scores
 end
 
 def count_negatives results
-  results.map do |r|
-    r[:sentiment]
-  end.select { |s| s == :negative }.count
+  results.map { |r| r[:sentiment] }.select { |s| s == :negative }.count
 end
 
 def count_positives results
-  results.map do |r|
-    r[:sentiment]
-  end.select { |s| s == :positive }.count
+  results.map { |r| r[:sentiment] }.select { |s| s == :positive }.count
 end
 
 def count_positives results
-  results.map do |r|
-    r[:sentiment]
-  end.select { |s| s == :neutral }.count
+  results.map { |r| r[:sentiment] }.select { |s| s == :neutral }.count
 end
 
 def run_month
