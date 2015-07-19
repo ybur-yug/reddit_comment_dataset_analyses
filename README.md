@@ -3,6 +3,8 @@
 The data sets given (month by month bz2 files) are newline-delimited JSON blocks. I have written preprocessing scripts
 that are detailed further in here
 
+### [CRB Talk Slides](http://slides.com/bobbygrayson/p/live#/0/1)
+
 You can find the torrent with all of it with this magnet link:
 
 ```
